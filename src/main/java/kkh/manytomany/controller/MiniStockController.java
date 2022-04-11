@@ -34,7 +34,7 @@ public class MiniStockController {
 
 	@Autowired
 	private MiniRefrigeratorService miniRefrigeratorService;
-	
+
 	@Autowired
 	private AddStockToRefriService addStockToRefriService;
 
@@ -143,29 +143,51 @@ public class MiniStockController {
 
 	@PostMapping("/addRefri2Stock")
 	public String addRefri2Stock(@ModelAttribute("bean") AddStockToRefriBean bean, BindingResult br, ModelMap map) {
-		if(br.hasErrors()) {
+		if (br.hasErrors()) {
 			return "HMS-MRF-02";
 		}
-		
+
 		AddStockToRefriDTO dto = new AddStockToRefriDTO();
-		
+
 		dto.setRefrigeratorId(bean.getRefrigeratorId());
 		dto.setStockName(bean.getStockName());
 		dto.setStockQty(bean.getStockQty());
-		addStockToRefriService.insert(dto);
-		
-		//get particular stock(entity class) Object that the owner of relationship with m2m annotation
+
+		/*
+		 * get the particular stock(entity class) Object that the owner side of
+		 * relationship with m2m annotation
+		 */
 		MiniStockDTO msDto = miniStockService.findByName(bean.getStockName());
-		
-		//set the particular refrigerator object to the above stock class
-		List<MiniRefrigeratorDTO> list = new ArrayList<>();
-		list.add(miniRefrigeratorService.getObjById(bean.getRefrigeratorId()));
-		msDto.getRefrigerator().addAll(list);
-//		msDto.setRefrigerator(miniRefrigeratorService.findById(bean.getRefrigeratorId()));
-		
-		//update stock
-		miniStockService.save(msDto);
-		
+		// get total quantity of the particular stock class
+		int totalQty = msDto.getQty();
+		// get current quantity of stock of the front-end bean
+		int currentQty = Integer.parseInt(bean.getStockQty());
+
+		if (currentQty <= totalQty) {
+
+			// set the particular refrigerator object to the above stock class
+			List<MiniRefrigeratorDTO> list = new ArrayList<>();
+			list.add(miniRefrigeratorService.getObjById(bean.getRefrigeratorId()));
+			msDto.getRefrigerator().addAll(list);
+			// msDto.setRefrigerator(miniRefrigeratorService.findById(bean.getRefrigeratorId()));
+
+			// update stock
+			miniStockService.save(msDto);
+
+			// update stock_to_refri
+			addStockToRefriService.insert(dto);
+
+			int newQty = totalQty - currentQty;
+			msDto.setQty(newQty);
+			miniStockService.update(msDto, msDto.getStockId());
+
+		} else {
+			map.addAttribute("msg", "Total stock quantity is " + msDto.getQty());
+		}
+
 		return "redirect:/ministock/addRefri2Stock";
 	}
+
+	
+	
 }

@@ -29,7 +29,8 @@ public class MiniRefrigeratorController {
 		MiniRefrigeratorBean bean = new MiniRefrigeratorBean();
 		List<MiniRefrigeratorDTO> list = miniRefrigeratorService.findAll();
 
-		System.out.println(list.size());
+//		System.out.println(list.size());
+		
 		if (list.size() == 0) {
 			bean.setMiniRefrigeratorId("MRF0001");
 
