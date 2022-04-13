@@ -49,4 +49,5 @@ public class AddStockToRefriDTO {
 		this.stockQty = stockQty;
 	}
 
+
 }
