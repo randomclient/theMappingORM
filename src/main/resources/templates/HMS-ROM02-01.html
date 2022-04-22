@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8" />
+	<title>HMS Admin Dashboard</title>
+	<!-- CSS LINKS HERE -->
+	<th:block th:insert="~{/fragments::link}" />
+
+</head>
+
+<body class="hold-transition sidebar-mini layout-fixed">
+	<div class="wrapper">
+		<!-- Preloader -->
+		<div class="preloader flex-column justify-content-center align-items-center">
+			<img class="animation__shake" th:src="@{/assets/dist/img/AdminLTELogo.png}" alt="TEAM BETA" height="60"
+				width="100" />
+		</div>
+
+		<!-- Navbar -->
+		<nav th:insert="~{/fragments::theNavbar}"></nav>
+		<!-- /.navbar -->
+
+		<!-- Main Sidebar Container -->
+		<aside th:insert="~{/fragments::theSidebar}"></aside>
+		<!-- Main Sidebar Container end -->
+
+		<!--  main content -->
+		<div class="content-wrapper">
+			<section class="content">
+				<!-- Content Header (Page header) -->
+				<div class="content-header">
+					<div class="container-fluid">
+						<div class="row mb-2">
+							<div class="col-sm-6">
+								<h1 class="m-0">Dashboard</h1>
+							</div>
+							<!-- /.col -->
+							<div class="col-sm-6">
+								<ol class="breadcrumb float-sm-right">
+									<li class="breadcrumb-item"><a href="#">Home</a></li>
+									<li class="breadcrumb-item active">Dashboard</li>
+								</ol>
+							</div>
+							<!-- /.col -->
+						</div>
+						<!-- /.row -->
+					</div>
+					<!-- /.container-fluid -->
+				</div>
+				<!-- /.content-header -->
+
+				<div class="container-fluid">
+					<div class="container-fluid">
+						<div class="row">
+							<div class="card mx-auto">
+								<div class="card-header border-transparent">
+									<h3 class="card-title">All Room</h3>
+									<label id="message" th:text="${error}"></label><label id="message"
+										th:text="${success}"></label><br /> <br /> <br />
+
+									<div class="card-tools">
+										<button type="button" class="btn btn-tool" data-card-widget="collapse">
+											<i class="fas fa-minus"></i>
+										</button>
+										<button type="button" class="btn btn-tool" data-card-widget="remove">
+											<i class="fas fa-times"></i>
+										</button>
+									</div>
+								</div>
+								<!-- /.card-header -->
+								<div class="card-body p-10">
+									<div class="table-responsive">
+										<div class="form-group">
+											<a th:href="@{/room/addRoom}"><button type="button"
+													class="btn btn-outline-primary">
+													Add</button></a>
+										</div>
+										<table class="table m-0">
+											<thead>
+												<tr>
+													<th>#</th>
+													<th>Room Name</th>
+													<th>Room Status</th>
+													<th>Room Description</th>
+													<th>Room Type Name</th>
+													<th>Cleaning Status</th>
+													<th>Action</th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr th:each="list:${rList}">
+													<td></td>
+													<td th:text="${list.room_number}"></td>
+													<td th:text="${list.room_status}"></td>
+													<td th:text="${list.room_desc}"></td>
+													<td th:text="${list.roomType.roomtype_name}"></td>
+													<td th:text="${list.room_cleanstatus}"></td>
+													<td><a th:href="@{/room/editRoom(roomno=${list.room_number})}"
+															class="btn btn-default btn-xs">
+															<button style="border: hidden" class="fa fa-pencil-alt"
+																title="Edit"></button>
+														</a> <a
+															th:href="@{/room/deleteRoom(roomno=${list.room_number})}"
+															class="btn btn-default btn-xs"
+															onclick="return confirm('Are you sure want to delete ?')"><button
+																style="border: hidden" class="fa fa-trash-alt"
+																title="Delete"></button></a></td>
+												</tr>
+											</tbody>
+										</table>
+
+									</div>
+									<!-- /.table-responsive -->
+								</div>
+								<!-- /.card-body -->
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+		</div>
+		<!-- Main Footer -->
+		<footer th:insert="~{/fragments::theFooter}"></footer>
+
+		<!-- Control Sidebar -->
+		<aside class="control-sidebar control-sidebar-dark">
+			<!-- Control sidebar content goes here -->
+		</aside>
+		<!-- /.control-sidebar -->
+	</div>
+	<!-- ./wrapper -->
+
+	<!-- javascript tags -->
+	<th:block th:insert="~{/fragments::body/script}" />
+
+</body>
+
+</html>

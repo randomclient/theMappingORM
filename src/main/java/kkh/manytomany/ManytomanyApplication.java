@@ -1,16 +1,7 @@
 package kkh.manytomany;
 
-import java.util.Arrays;
-
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.Bean;
-
-import kkh.manytomany.entity.MiniRefrigeratorDTO;
-import kkh.manytomany.entity.MiniStockDTO;
-import kkh.manytomany.repository.MiniRefrigeratorRepository;
-import kkh.manytomany.repository.MiniStockRepository;
 
 @SpringBootApplication
 public class ManytomanyApplication {

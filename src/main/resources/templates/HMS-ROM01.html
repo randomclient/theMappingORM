@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8" />
+	<title>HMS Admin Dashboard</title>
+	<!-- CSS LINKS HERE -->
+	<th:block th:insert="~{/fragments::link}" />
+
+</head>
+
+<body class="hold-transition sidebar-mini layout-fixed">
+	<div class="wrapper">
+		<!-- Preloader -->
+		<div class="preloader flex-column justify-content-center align-items-center">
+			<img class="animation__shake" th:src="@{/assets/dist/img/AdminLTELogo.png}" alt="TEAM BETA" height="60"
+				width="100" />
+		</div>
+
+		<!-- Navbar -->
+		<nav th:insert="~{/fragments::theNavbar}"></nav>
+		<!-- /.navbar -->
+
+		<!-- Main Sidebar Container -->
+		<aside th:insert="~{/fragments::theSidebar}"></aside>
+		<!-- Main Sidebar Container end -->
+
+		<!--  main content -->
+		<div class="content-wrapper">
+			<section class="content">
+				<!-- Content Header (Page header) -->
+				<div class="content-header">
+					<div class="container-fluid">
+						<div class="row mb-2">
+							<div class="col-sm-6">
+								<h1 class="m-0">Dashboard</h1>
+							</div>
+							<!-- /.col -->
+							<div class="col-sm-6">
+								<ol class="breadcrumb float-sm-right">
+									<li class="breadcrumb-item"><a href="#">Home</a></li>
+									<li class="breadcrumb-item active">Dashboard</li>
+								</ol>
+							</div>
+							<!-- /.col -->
+						</div>
+						<!-- /.row -->
+					</div>
+					<!-- /.container-fluid -->
+				</div>
+				<!-- /.content-header -->
+
+				<div class="container-fluid">
+					<div class="container-fluid">
+						<div class="row">
+							<div class="card mx-auto">
+								<div class="card-header border-transparent">
+									<h3 class="card-title">Add Room Type</h3>
+
+									<div class="card-tools">
+										<button type="button" class="btn btn-tool" data-card-widget="collapse">
+											<i class="fas fa-minus"></i>
+										</button>
+										<button type="button" class="btn btn-tool" data-card-widget="remove">
+											<i class="fas fa-times"></i>
+										</button>
+									</div>
+								</div>
+								<!-- /.card-header -->
+								<div class="card-body p-0">
+									<div class="table-responsive">
+										<form class="mx-5 my-5" enctype="multipart/form-data"
+											th:action="@{/roomType/addRoomType}" method="post" th:object="${roomType}">
+											<label id="message" th:text="${error}"></label><label id="message"
+												th:text="${success}"></label>
+											<div class="form-row">
+
+												<div class="form-group col-md-6">
+													<label for="username">Room Type Id</label> <input type="text"
+														th:field="*{roomtype_id}" class="form-control" />
+												</div>
+												<div class="form-group col-md-6">
+													<label for="username">Room Type Name</label> <input type="text"
+														class="form-control" id="username"
+														th:field="*{roomtype_name}" />
+												</div>
+												<div class="form-group col-md-6">
+													<label for="price">Price</label> <input type="text"
+														class="form-control" id="price" th:field="*{room_price}" />
+												</div>
+											</div>
+											<div class="form-group">
+												<label for="overview">Overview</label>
+												<textarea class="form-control" id="overview" rows="3"
+													th:field="*{roomtype_overview}"></textarea>
+											</div>
+											<div class="form-group">
+												<label for="detail">Detail</label>
+												<textarea class="form-control" id="detail" rows="3"
+													th:field="*{roomtype_detail}"></textarea>
+											</div>
+											<div class="form-group">
+												<label for="pakDescription">Amentities</label>
+												<textarea class="form-control" id="pakDescription" rows="3"
+													th:field="*{roomtype_desc}"></textarea>
+											</div>
+											<div class="form-group">
+												<label for="specialFeature">Status</label>
+												<select th:field="*{roomtype_status}" class="form-control">
+													<option value="" selected="selected">Choose...</option>
+													<option value="Active">Active</option>
+													<option value="Inactive">Inactive</option>
+												</select>
+											</div>
+											<div class="form-group">
+												<label for="coverPhoto">Cover Photo</label> <input type="file"
+													name="coverimg" class="form-control-file" id="coverPhoto"
+													th:field="*{roomtype_coverimg}" accept="image/*"> <span
+													th:text="${fileError}"></span>
+
+											</div>
+											<div class="form-row">
+												<div class="form-group col-md-6">
+													<label for="gal1">Gallery 1</label> <input type="file" name="img1"
+														class="form-control-file" id="gal1" th:field="*{roomtype_img1}"
+														accept="image/*"> <span th:text="${fileError}"></span>
+
+												</div>
+												<div class="form-group col-md-6">
+													<label for="gal2">Gallery 2</label> <input type="file" name="img2"
+														class="form-control-file" id="gal2" th:field="*{roomtype_img2}"
+														accept="image/*"> <span th:text="${fileError}"></span>
+
+												</div>
+												<div class="form-group col-md-6">
+													<label for="gal3">Gallery 3</label> <input type="file" name="img3"
+														class="form-control-file" id="gal3" th:field="*{roomtype_img3}"
+														accept="image/*"> <span th:text="${fileError}"></span>
+
+												</div>
+												<div class="form-group col-md-6">
+													<label for="gal4">Gallery 4</label> <input type="file" name="img4"
+														class="form-control-file" id="gal4" th:field="*{roomtype_img4}"
+														accept="image/*"> <span th:text="${fileError}"></span>
+
+												</div>
+											</div>
+											<button type="submit" class="btn btn-info">Add Room
+												Type</button>
+										</form>
+									</div>
+									<!-- /.table-responsive -->
+								</div>
+								<!-- /.card-body -->
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+		</div>
+		<!-- Main Footer -->
+		<footer th:insert="~{/fragments::theFooter}"></footer>
+
+		<!-- Control Sidebar -->
+		<aside class="control-sidebar control-sidebar-dark">
+			<!-- Control sidebar content goes here -->
+		</aside>
+		<!-- /.control-sidebar -->
+	</div>
+	<!-- ./wrapper -->
+
+	<!-- javascript tags -->
+	<th:block th:insert="~{/fragments::body/script}" />
+
+</body>
+
+</html>

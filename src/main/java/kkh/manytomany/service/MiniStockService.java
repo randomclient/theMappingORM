@@ -23,8 +23,8 @@ public class MiniStockService {
 		return miniStockRepository.save(dto);
 	}
 
-	public MiniStockDTO findByName(String stockName) {
-		return miniStockRepository.findByName(stockName);
+	public MiniStockDTO findByName(String brandName) {
+		return miniStockRepository.findByName(brandName);
 	}
 	
 	public List<MiniStockDTO> findByid(String stockId) {
@@ -46,4 +46,18 @@ public class MiniStockService {
 	public void updateStatus(String stockId) {
 		miniStockRepository.updateStatus(stockId);
 	}
+	
+	public List<MiniStockDTO> getObj(String name, String brandName, String supplier){
+		return miniStockRepository.getObj(name,brandName,supplier);
+	}
+	
+	public void updateExistingStock(int qty, String stockId) {
+		miniStockRepository.updateExistingStock(qty, stockId);
+	}
+
+	public List<MiniStockDTO> findByBrandName(String brandName) {
+		return miniStockRepository.findByBrandName(brandName);
+	}
+
+	
 }
